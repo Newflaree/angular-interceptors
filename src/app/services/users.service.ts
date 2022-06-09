@@ -19,9 +19,8 @@ export class UsersService {
       'x-token': 'lakfejofijsdaflkjdslfkjeoiajlkdsajf'
     })
 
-    return this.http.get( 'https://rqres.in/api/user', {
+    return this.http.get( 'https://reqres.in/api/user', {
       params,
-      headers
     }).pipe(
       map( (resp: any) => resp['data']),
       catchError( err => this.handleError( err ))
