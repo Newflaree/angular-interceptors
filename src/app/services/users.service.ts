@@ -15,21 +15,12 @@ export class UsersService {
     let params = new HttpParams().append('page', '1');
     params = params.append('name', 'Camilo López');
 
-    let headers = new HttpHeaders({
-      'x-token': 'lakfejofijsdaflkjdslfkjeoiajlkdsajf'
-    })
 
-    return this.http.get( 'https://reqres.in/api/user', {
+    return this.http.get( 'https://reqes.in/api/user', {
       params,
     }).pipe(
-      map( (resp: any) => resp['data']),
-      catchError( err => this.handleError( err ))
+      map( (resp: any) => resp['data'])
     );
   }
 
-  handleError( err: HttpErrorResponse ) {
-    console.log( 'Something went wrong' );
-    console.warn( err );
-    return throwError( `Custom error` );
-  }
 }
