@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { catchError, map, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,18 @@ export class UsersService {
       'x-token': 'lakfejofijsdaflkjdslfkjeoiajlkdsajf'
     })
 
-    return this.http.get( 'https://reqres.in/api/user', {
+    return this.http.get( 'https://rqres.in/api/user', {
       params,
       headers
-    });
+    }).pipe(
+      map( (resp: any) => resp['data']),
+      catchError( err => this.handleError( err ))
+    );
+  }
+
+  handleError( err: HttpErrorResponse ) {
+    console.log( 'Something went wrong' );
+    console.warn( err );
+    return throwError( `Custom error` );
   }
 }
